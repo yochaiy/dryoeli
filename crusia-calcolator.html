@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Forty by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="landing.html">Landing</a></li>
+							<li><a href="generic.html">Generic</a></li>
+							<li><a href="elements.html">Elements</a></li>
+							<li><a href="crusia-calcolator.html">Crusia Calculator</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<form id="calculator-form">
+						<br><br>
+						<div style="margin-left: 100px;">
+							<h2>Crusia Calc</h2>
+							<label for="age">Age:</label>
+							<input type="number" id="age" name="age" required style="color: black;">
+							<br>
+
+							<label for="birth">birth:</label>
+							<input type="number" id="birth" name="birth" required style="color: black;">
+							<br>
+
+							<label for="bmi">bmi:</label>
+							<input type="number" id="bmi" name="bmi" required style="color: black;">
+							<br>
+
+							<button type="button" onclick="calculateHealthScore()">Calculate</button>
+
+							<h2>Health Score: <span id="health-score">-</span></h2>
+							<h2>Crusia Treatment: <span id="crusia-treatment">-</span></h2>
+						</div>
+					<script defer>
+						function calculateHealthScore() {
+							// Get the values from the form
+							const age = parseInt(document.getElementById('age').value);
+							const birth = parseInt(document.getElementById('birth').value);
+							const bmi = parseInt(document.getElementById('bmi').value);
+							let age_score = 0
+							let birth_score = 0
+							let bmi_score = 0
+							let treatment = "No treatment needed"
+
+
+							// Validate input
+							if (isNaN(age) || isNaN(birth) || isNaN(bmi) || birth <= 0 || bmi <= 0 || age <= 0) {
+								alert('Please enter valid positive numbers for age, birth, and bmi.');
+								return;
+							}
+
+							// Calculate health score based on BMI and age
+							let healthScore = 0;
+
+							if (bmi < 30) {
+								bmi_score = 0;
+							} else if (bmi >= 30 && bmi < 35) {
+								bmi_score = 1;
+							} else if (bmi >= 35 && bmi < 38) {
+								bmi_score = 2;
+							} else if (bmi >= 38 && bmi < 44) {
+								bmi_score = 3;
+							} else {
+								bmi_score = 4;
+							}
+
+							// Adjust score based on age (optional, this can be customized)
+							if (age < 36) {
+								age_score = 0;
+							} else if (age >= 36 && age < 40) {
+								age_score = 1;
+							} else if (age >= 40 && age < 43) {
+								age_score = 2;
+							} else {
+								age_score = 3;
+							}
+
+							if (birth < 4) {
+								birth_score = 0;
+							} else if (birth == 4) {
+								birth_score = 1;
+							} else if (birth == 5) {
+								birth_score = 2;
+							} else if (birth == 6) {
+								birth_score = 3;
+							} else {
+								birth_score = 4;
+							}
+
+							// Ensure health score is between 1 and 4
+							healthScore = age_score + bmi_score + birth_score;
+
+
+							if (healthScore < 3) {
+								treatment = treatment;
+							} else if (healthScore == 3) {
+								treatment = "Treat for 14 days";
+							} else if (healthScore == 4) {
+								treatment = "Treat for 21 days";
+							} else {
+								treatment = "Treat for 28 days";
+							}
+
+
+							// Update the result on the page
+							document.getElementById('health-score').textContent = healthScore;
+							document.getElementById('crusia-treatment').textContent = treatment;
+						}
+					</script>
+					</form>
+
+
+
+
+
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
